@@ -7,7 +7,7 @@ import android.hardware.SensorManager;
 
 public class CompassService implements SensorEventListener {
 
-    private int degree;
+    private int mDegree;
     private SensorManager mSensorManager;
 
     public CompassService(SensorManager sensorManager) {
@@ -16,7 +16,7 @@ public class CompassService implements SensorEventListener {
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-        degree = Math.round(sensorEvent.values[0]);
+        mDegree = Math.round(sensorEvent.values[0]);
     }
 
     @Override
@@ -35,6 +35,6 @@ public class CompassService implements SensorEventListener {
     }
 
     public int getDegree() {
-        return degree;
+        return mDegree;
     }
 }

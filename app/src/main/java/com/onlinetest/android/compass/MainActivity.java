@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity{
 
 //        bluetoothConfig();
         mCompassService = new CompassService((SensorManager) getSystemService(SENSOR_SERVICE));
+        mCompassService.openListener();
 
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
