@@ -72,7 +72,7 @@ public class BluetoothService {
         return BLUETOOTH_SWITCH_OFF_CODE;
     }
 
-    private void sendData(String message) {
+    public void sendData(String message) {
         byte[] msgBuffer = message.getBytes();
 
         Log.d(TAG, "...Посылаем данные: " + message + "...");

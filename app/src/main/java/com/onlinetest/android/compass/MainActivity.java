@@ -1,5 +1,6 @@
 package com.onlinetest.android.compass;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.bluetooth.BluetoothAdapter;
@@ -39,10 +40,7 @@ public class MainActivity extends AppCompatActivity{
 
     private CompassService mCompassService;
 
-    // SPP UUID сервиса
-
-
-    // MAC-адрес Bluetooth модуля
+    public static final String DEGREE_EXTRA = "com.onlinetest.android.compass.degree";
 
 
     @Override
@@ -56,6 +54,11 @@ public class MainActivity extends AppCompatActivity{
 //        bluetoothConfig();
         mCompassService = new CompassService((SensorManager) getSystemService(SENSOR_SERVICE));
         mCompassService.openListener();
+
+        CompassDataAdapter compassDataAdapter = new CompassDataAdapter(mCompassService);
+        compassDataAdapter.setDegreeTextView(mDegreeText);
+        compassDataAdapter.setShowDegree(true);
+        compassDataAdapter.start();
 
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,4 +90,12 @@ public class MainActivity extends AppCompatActivity{
         finish();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (data == null) return;
+
+        int calibrateDegree = data.getIntExtra(DEGREE_EXTRA, 0);
+    }
 }
